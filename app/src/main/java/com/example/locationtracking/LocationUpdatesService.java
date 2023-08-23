@@ -304,7 +304,7 @@ public class LocationUpdatesService extends Service {
 
     private void updateLocation(Location location) {
         ApiEndPoint apiService = ApiClient.getClient().create(ApiEndPoint.class);
-        Call<LocationResponse> call = apiService.postLocation("demo", getDeviceName(), location.getLatitude(), location.getLongitude());
+        Call<LocationResponse> call = apiService.storeLocation("demo", getDeviceName(), location.getLatitude(), location.getLongitude());
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<LocationResponse> call, @NonNull Response<LocationResponse> response) {

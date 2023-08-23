@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    android:weightSum="10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_marginTop="@dimen/margin_50"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher_round" />
+        <com.example.locationtracking.AppSemiBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="WELCOME TO"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_12" />
+        <com.example.locationtracking.AppSemiBoldTextView
+            android:id="@+id/txtHeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/margin_5"
+            android:text="SALES ASSISTANT"
+            android:textAlignment="center"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/txt_size_16" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/margin_30"
+        android:paddingEnd="@dimen/margin_30"
+        android:gravity="center_vertical">
+        <com.example.locationtracking.AppTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMPLOYEE ID"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_12" />
+        <com.example.locationtracking.AppEditText
+            android:id="@+id/txtEmployeeId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_background_style"
+            android:hint="Enter Employee ID"
+            android:inputType="text"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:padding="@dimen/margin_15"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/txt_size_14" />
+        <com.example.locationtracking.AppTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="PASSWORD"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_12" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_background_style"
+                android:hint="Enter Password"
+                android:padding="@dimen/margin_15"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/txt_size_14"/>
+            <ImageView
+                android:id="@+id/btnShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:paddingEnd="@dimen/margin_20"
+                android:src="@drawable/ic_eye"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
+        <com.example.locationtracking.AppCheckBox
+            android:id="@+id/btnCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Auto Login"
+            android:layout_gravity="start"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:paddingStart="@dimen/margin_50"
+        android:paddingEnd="@dimen/margin_50">
+        <com.example.locationtracking.AppButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_button"
+            android:text="LOGIN"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_16" />
+    </RelativeLayout>
+
+</LinearLayout>

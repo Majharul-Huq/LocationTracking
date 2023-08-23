@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +32,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".UserLoginActivity" android:screenOrientation="fullSensor" />
         <activity android:name=".MainActivity" android:screenOrientation="fullSensor" />
+
 
         <service
             android:name="com.example.locationtracking.LocationUpdatesService"

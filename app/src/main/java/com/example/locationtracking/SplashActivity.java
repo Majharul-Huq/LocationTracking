@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     // Thread will sleep for 2 seconds
                     sleep(SPLASH_DURATION);
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    Intent intent = new Intent(getBaseContext(), UserLoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception e) {
