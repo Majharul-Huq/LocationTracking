@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "210604428872",
+    "project_id": "bg-crm",
+    "storage_bucket": "bg-crm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210604428872:android:d4c510246e912a6d63527d",
+        "android_client_info": {
+          "package_name": "com.example.locationtracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210604428872-i5h9karl6petppcb7rh80vcimeapp0qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClTmYaVZGfH8WplGbdP_MGEBgEvAu-7Ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210604428872-i5h9karl6petppcb7rh80vcimeapp0qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210604428872:android:b387e18293b2c1da63527d",
+        "android_client_info": {
+          "package_name": "com.bg.crm.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210604428872-i5h9karl6petppcb7rh80vcimeapp0qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClTmYaVZGfH8WplGbdP_MGEBgEvAu-7Ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210604428872-i5h9karl6petppcb7rh80vcimeapp0qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
