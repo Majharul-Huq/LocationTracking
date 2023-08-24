@@ -25,6 +25,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.example.locationtracking.activities.MainActivity;
+import com.example.locationtracking.api.ApiClient;
+import com.example.locationtracking.api.ApiEndPoint;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -260,14 +263,14 @@ public class LocationUpdatesService extends Service {
         PendingIntent activityPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_MUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .addAction(R.mipmap.ic_launcher_round, getString(R.string.launch_activity), activityPendingIntent)
-                .addAction(R.mipmap.ic_launcher_round, getString(R.string.remove_location_updates), servicePendingIntent)
+                .addAction(R.mipmap.ic_launcher_circle, getString(R.string.launch_activity), activityPendingIntent)
+                .addAction(R.mipmap.ic_launcher_circle, getString(R.string.remove_location_updates), servicePendingIntent)
                 .setContentText(address)
                 .setContentTitle(LocationUtil.getLocationTitle(this))
                 .setOngoing(true)
                 .setSilent(true)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.ic_launcher_circle)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                 .setTicker(address)
                 .setWhen(System.currentTimeMillis());

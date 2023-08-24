@@ -10,17 +10,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="3.5"
         android:orientation="vertical">
         <ImageView
             android:id="@+id/imageViewLogo"
             android:layout_marginTop="@dimen/margin_50"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher_round" />
-        <com.example.locationtracking.AppSemiBoldTextView
+            android:src="@drawable/icon_thumb" />
+        <com.example.locationtracking.components.AppSemiBoldTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
@@ -28,31 +28,31 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/txt_size_12" />
-        <com.example.locationtracking.AppSemiBoldTextView
+        <com.example.locationtracking.components.AppSemiBoldTextView
             android:id="@+id/txtHeadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/margin_5"
             android:text="SALES ASSISTANT"
             android:textAlignment="center"
-            android:textColor="@color/purple_200"
-            android:textSize="@dimen/txt_size_16" />
+            android:textColor="@color/black"
+            android:textSize="24sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5"
+        android:layout_weight="4"
         android:orientation="vertical"
         android:paddingStart="@dimen/margin_30"
         android:paddingEnd="@dimen/margin_30"
         android:gravity="center_vertical">
-        <com.example.locationtracking.AppTextView
+        <com.example.locationtracking.components.AppTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EMPLOYEE ID"
             android:textColor="@color/black"
             android:textSize="@dimen/txt_size_12" />
-        <com.example.locationtracking.AppEditText
+        <com.example.locationtracking.components.AppEditText
             android:id="@+id/txtEmployeeId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="@dimen/txt_size_14" />
-        <com.example.locationtracking.AppTextView
+        <com.example.locationtracking.components.AppTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
@@ -97,7 +97,7 @@
                 app:tint="@color/black" />
         </RelativeLayout>
 
-        <com.example.locationtracking.AppCheckBox
+        <com.example.locationtracking.components.AppCheckBox
             android:id="@+id/btnCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         android:layout_weight="2.5"
         android:paddingStart="@dimen/margin_50"
         android:paddingEnd="@dimen/margin_50">
-        <com.example.locationtracking.AppButton
+        <com.example.locationtracking.components.AppButton
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
