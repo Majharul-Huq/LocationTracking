@@ -15,11 +15,11 @@ public interface ApiEndPoint {
     Call<ResponseBody> login(@Field("id") String id,
                              @Field("password") String password);
 
-    @POST("store-location")
+    @POST("location/store")
     @FormUrlEncoded
     Call<ResponseBody> storeLocation(@Field("latitude") double latitude,
                                      @Field("longitude") double longitude,
-                                     @Field("longitude") String address,
+                                     @Field("address") String address,
                                      @Header("Authorization") String accessToken);
 
 
