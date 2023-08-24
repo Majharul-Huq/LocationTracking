@@ -8,8 +8,8 @@
     <string name="ok">OK</string>
     <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
     <string name="settings">Settings</string>
-    <string name="start">Start Tracking</string>
-    <string name="end">Stop Tracking</string>
+    <string name="start">START</string>
+    <string name="end">STOP</string>
     <string name="launch_activity">Open App</string>
     <string name="remove_location_updates">Remove location </string>
 </resources>

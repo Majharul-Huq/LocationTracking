@@ -1,28 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="2"
     tools:context=".activities.MainActivity">
 
-    <Button
-        android:id="@+id/startBtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="@string/start"
-        android:textColor="@color/black"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/layoutPhoto"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/placeholder_large">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/userPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                fresco:fadeDuration="300"
+                fresco:placeholderImage="@drawable/blank_placeholder"
+                fresco:placeholderImageScaleType="fitCenter" />
+        </LinearLayout>
+        <com.example.locationtracking.components.AppSemiBoldTextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="NAME"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_16" />
+        <com.example.locationtracking.components.AppTextView
+            android:id="@+id/txtDesignation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DESIGNATION"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_12" />
 
-    <Button
-        android:id="@+id/endBtn"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/startBtn"
-        android:layout_margin="30dp"
-        android:text="@string/end"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/startBtn" />
-</RelativeLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_50"
+        android:gravity="center">
+        <com.example.locationtracking.components.AppButton
+            android:id="@+id/startBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/round_button"
+            android:text="@string/start"
+            android:textColor="@color/white" />
+        <com.example.locationtracking.components.AppButton
+            android:id="@+id/endBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_below="@id/startBtn"
+            android:background="@drawable/round_button"
+            android:text="@string/end"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

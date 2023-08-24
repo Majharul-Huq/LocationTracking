@@ -11,8 +11,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,14 +26,33 @@ import androidx.core.app.ActivityCompat;
 import com.example.locationtracking.BuildConfig;
 import com.example.locationtracking.LocationUpdatesService;
 import com.example.locationtracking.R;
+import com.example.locationtracking.components.AppCheckBox;
 import com.example.locationtracking.databinding.ActivityMainBinding;
+import com.example.locationtracking.util.UserDataManager;
+import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.snackbar.Snackbar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    @BindView(R.id.txtName)
+    TextView txtName;
+    @BindView(R.id.txtDesignation)
+    TextView txtDesignation;
+
+    @BindView(R.id.userPhoto)
+    SimpleDraweeView userPhoto;
+
+    @BindView(R.id.startBtn)
+    Button startBtn;
+
+    @BindView(R.id.endBtn)
+    Button endBtn;
+
     private LocationUpdatesService mService = null;
 
     private boolean mBound = false;
@@ -57,8 +80,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        txtName.setText(UserDataManager.getKeyName(getApplicationContext()));
+        txtDesignation.setText(UserDataManager.getKeyDesignation(getApplicationContext()));
+        String photoUrl = UserDataManager.getKeyPhotoUrl(getApplicationContext());
+        if (photoUrl != null && !TextUtils.isEmpty(photoUrl)) {
+            userPhoto.setImageURI(Uri.parse(photoUrl));
+            RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+            roundingParams.setRoundAsCircle(true);
+            userPhoto.getHierarchy().setRoundingParams(roundingParams);
+        }
+
+        startBtn.setVisibility(View.VISIBLE);
+        endBtn.setVisibility(View.GONE);
 
       /*  NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -71,15 +107,18 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions();
         }
 
-        binding.startBtn.setOnClickListener(view -> {
+        startBtn.setOnClickListener(view -> {
             if (!checkPermissions()) {
                 requestPermissions();
             }
             mService.requestLocationUpdates();
+            startBtn.setVisibility(View.VISIBLE);
+            endBtn.setVisibility(View.GONE);
         });
 
-        binding.endBtn.setOnClickListener(view -> {
-
+        endBtn.setOnClickListener(view -> {
+            startBtn.setVisibility(View.GONE);
+            endBtn.setVisibility(View.VISIBLE);
             mService.removeLocationUpdates();
         });
     }
@@ -117,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         // request previously, but didn't check the "Don't ask again" checkbox.
         if (shouldProvideRationale) {
             Timber.i("Displaying permission rationale to provide additional context.");
-            Snackbar.make(binding.getRoot(), R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(endBtn, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, view -> {
                         // Request permission
                         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
@@ -142,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 mService.requestLocationUpdates();
             } else {
-                Snackbar.make(binding.getRoot(), R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE)
+                Snackbar.make(endBtn, R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.settings, view -> {
                             Intent intent = new Intent();
                             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
