@@ -112,13 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions();
             }
             mService.requestLocationUpdates();
-            startBtn.setVisibility(View.VISIBLE);
-            endBtn.setVisibility(View.GONE);
+            startBtn.setVisibility(View.GONE);
+            endBtn.setVisibility(View.VISIBLE);
         });
 
         endBtn.setOnClickListener(view -> {
-            startBtn.setVisibility(View.GONE);
-            endBtn.setVisibility(View.VISIBLE);
+            endBtn.setVisibility(View.GONE);
+            startBtn.setVisibility(View.VISIBLE);
             mService.removeLocationUpdates();
         });
     }

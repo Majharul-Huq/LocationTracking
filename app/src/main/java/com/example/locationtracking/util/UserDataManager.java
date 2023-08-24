@@ -14,6 +14,8 @@ public class UserDataManager {
 
     private static final String KEY_LOGIN_REMEMBER = "KEY_LOGIN_REMEMBER";
 
+    private static final String KEY_TIME_INTERVAL = "KEY_TIME_INTERVAL";
+
     private static String getPrefName(String packageName) {
         return "tracker-data";
     }
@@ -90,6 +92,16 @@ public class UserDataManager {
     public static void setKeyLoginRemember(Context context, boolean input) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         editor.putBoolean(KEY_LOGIN_REMEMBER, input);
+        editor.commit();
+    }
+
+    public static String getKeyTimeInterval(Context context) {
+        return getPrefs(context).getString(KEY_TIME_INTERVAL, null);
+    }
+
+    public static void setKeyTimeInterval(Context context, String input) {
+        SharedPreferences.Editor editor = getPrefs(context).edit();
+        editor.putString(KEY_TIME_INTERVAL, input);
         editor.commit();
     }
 }

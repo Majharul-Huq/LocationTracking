@@ -140,13 +140,14 @@ public class UserLoginActivity extends AppCompatActivity {
                         String photoUrl = dataJson.getString("photo_url");
                         String designation = dataJson.getString("designation");
                         String accessToken = dataJson.getString("access_token");
-                        String time_interval = dataJson.getString("time_interval");
+                        String timeInterval = dataJson.getString("time_interval");
                         UserDataManager.setKeyName(getApplicationContext(),name);
                         UserDataManager.setKeyPhotoUrl(getApplicationContext(),photoUrl);
                         UserDataManager.setKeyDesignation(getApplicationContext(),designation);
                         UserDataManager.setKeyEmployeeId(getApplicationContext(),txtEmployeeId.getText().toString());
                         UserDataManager.setKeyPassword(getApplicationContext(),txtPassword.getText().toString());
                         UserDataManager.setKeyAccessToken(getApplicationContext(),accessToken);
+                        UserDataManager.setKeyTimeInterval(getApplicationContext(),timeInterval);
 
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);

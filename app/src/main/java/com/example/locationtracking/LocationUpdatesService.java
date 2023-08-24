@@ -28,6 +28,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.locationtracking.activities.MainActivity;
 import com.example.locationtracking.api.ApiClient;
 import com.example.locationtracking.api.ApiEndPoint;
+import com.example.locationtracking.util.UserDataManager;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,14 +68,12 @@ public class LocationUpdatesService extends Service {
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = (20 * 60 * 1000);
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = (60 * 1000);
 
     /**
      * The fastest rate for active location updates. Updates will never be more frequent
      * than this value.
      */
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-
     /**
      * The identifier for the notification displayed for the foreground service.
      */
@@ -292,6 +292,33 @@ public class LocationUpdatesService extends Service {
         }
     }
 
+    private String getAddress(double latitude, double longitude){
+        Geocoder geocoder;
+        List<Address> addresses;
+        String address = "";
+        String fullAddress = "";
+        geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            address = addresses.get(0).getAddressLine(0);
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName();
+            fullAddress = "Address : " + address
+                    + " City : " + city
+                    + " State : " + state
+                    + " Country : " + country
+                    + " PostalCode : " + postalCode
+                    + " KnownName : " + knownName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Timber.e(fullAddress);
+        return address;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.S)
     private void onNewLocation(Location location) {
         Timber.i("New location: %s", location);
@@ -307,13 +334,16 @@ public class LocationUpdatesService extends Service {
 
     private void updateLocation(Location location) {
         ApiEndPoint apiService = ApiClient.getClient().create(ApiEndPoint.class);
-        Call<LocationResponse> call = apiService.storeLocation("demo", getDeviceName(), location.getLatitude(), location.getLongitude());
-        call.enqueue(new Callback<>() {
+
+        String address = getAddress(location.getLatitude(), location.getLongitude());
+        String accessToken = UserDataManager.getKeyAccessToken(getApplicationContext());
+        Call<ResponseBody> call = apiService.storeLocation(location.getLatitude(), location.getLongitude(),address,"Bearer " + accessToken);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<LocationResponse> call, @NonNull Response<LocationResponse> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Timber.e(response.toString());
-                    LocationResponse appResponse = response.body();
+                    ResponseBody appResponse = response.body();
                     if (appResponse != null) {
                         Timber.e("Updated To Serve");
                     } else {
@@ -325,7 +355,7 @@ public class LocationUpdatesService extends Service {
             }
 
             @Override
-            public void onFailure(@NonNull Call<LocationResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 Timber.e("onFailure: %s", t.getMessage());
             }
         });
@@ -339,8 +369,8 @@ public class LocationUpdatesService extends Service {
     }
 
     private void createLocationRequest() {
-        mLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, UPDATE_INTERVAL_IN_MILLISECONDS).build();
-
+        String interval = UserDataManager.getKeyTimeInterval(getApplicationContext());
+        mLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, Integer.parseInt(interval) * UPDATE_INTERVAL_IN_MILLISECONDS).build();
     }
 
     public class LocalBinder extends Binder {
